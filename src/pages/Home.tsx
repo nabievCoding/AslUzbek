@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { ArrowLeftRight, BookOpen, Loader2, Pencil, Trash2, X, LogOut, Lock, User, LogIn } from 'lucide-react';
 import { toast } from 'sonner';
-import { wordsApi } from '../lib/api/words';
+import { wordsApi } from  '../lib/api/words';
 import {
   AlertDialog,
   AlertDialogAction,
