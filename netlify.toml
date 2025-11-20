@@ -6,5 +6,5 @@
   NODE_VERSION = "20"
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/index.html" 
   status = 200
