@@ -10,13 +10,19 @@ interface SearchBarProps {
   showAddButton: boolean;
 }
 
-export default function SearchBar({ 
-  searchTerm, 
-  onSearchChange, 
-  onAddWord, 
+export default function SearchBar({
+  searchTerm,
+  onSearchChange,
+  onAddWord,
   onDirectionToggle,
-  showAddButton 
+  showAddButton
 }: SearchBarProps) {
+  const handleInputFocus = () => {
+    setTimeout(() => {
+      const searchElement = document.getElementById('search-input');
+      searchElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  };
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-center w-full max-w-2xl mx-auto">
       {/* Search Input - takes most space */}
@@ -24,24 +30,27 @@ export default function SearchBar({
         <Input
           placeholder="So'z qidirish (zamonaviy yoki asl o'zbek)..."
           value={searchTerm}
+          id="search-input"
+          onFocus={handleInputFocus}
           onChange={(e) => onSearchChange(e.target.value)}
           className="h-12 text-base shadow-sm"
         />
       </div>
-      
+
       {/* Direction Toggle Button */}
-      <Button 
-        variant="outline" 
+      <Button
+        variant="outline"
         onClick={onDirectionToggle}
-        className="h-12 px-2 border-2"
+        className="px-2 border-2"
+        style={{position:'absolute',right:20,bottom:160, width:50,height:50}}
       >
         <ArrowLeftRight className="" />
-        
+
       </Button>
-      
+
       {/* Add Word Button (only for admin) */}
       {showAddButton && (
-        <Button 
+        <Button
           onClick={onAddWord}
           className="h-12 px-6 bg-green-600 hover:bg-green-700 text-white"
         >
