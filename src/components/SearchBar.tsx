@@ -10,7 +10,7 @@ interface SearchBarProps {
   showAddButton: boolean;
 }
 
-export function SearchBar({ 
+export default function SearchBar({ 
   searchTerm, 
   onSearchChange, 
   onAddWord, 
