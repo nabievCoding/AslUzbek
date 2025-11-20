@@ -24,13 +24,13 @@ export function AuthDialog({ open, onOpenChange, onLoginSuccess }: AuthDialogPro
   const [loading, setLoading] = useState(false);
 
   const ADMIN_CREDENTIALS = {
-    username: 'admin',
-    password: '123456'
+    username: 'Jannat_Kaliti',
+    password: '20112025'
   };
 
   const handleLogin = async () => {
     if (!username.trim() || !password.trim()) {
-      toast.error('Iltimos, login va parolni kiriting');
+      toast.error('Iltimos, Sir va Kalitni kiriting');
       return;
     }
 
@@ -39,13 +39,13 @@ export function AuthDialog({ open, onOpenChange, onLoginSuccess }: AuthDialogPro
     setTimeout(() => {
       if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
         localStorage.setItem('isAdmin', 'true');
-        toast.success('Boshqaruv paneliga muvaffaqiyatli kirdingiz!');
+        toast.success('Boshqaruv sahifasiga muvaffaqiyatli kirdingiz!');
         onLoginSuccess();
         onOpenChange(false);
         setUsername('');
         setPassword('');
       } else {
-        toast.error('Noto‘g‘ri login yoki parol');
+        toast.error('Noto‘g‘ri Sir yoki Kalit');
       }
       setLoading(false);
     }, 1000);
@@ -63,20 +63,20 @@ export function AuthDialog({ open, onOpenChange, onLoginSuccess }: AuthDialogPro
         <DialogHeader>
           <DialogTitle className="text-center text-2xl">Boshqaruvga Kirish</DialogTitle>
           <DialogDescription className="text-center">
-            Admin paneliga kirish uchun ma'lumotlaringizni kiriting
+            Boshqaruvchi sahifasiga kirish uchun ma'lumotlaringizni kiriting
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4 py-4">
           <div className="space-y-2">
             <Label htmlFor="username" className="text-base">
-              Login
+              Sir
             </Label>
             <div className="relative">
               <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 id="username"
-                placeholder="Loginingizni kiriting"
+                placeholder="Siringizni kiriting"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -87,14 +87,14 @@ export function AuthDialog({ open, onOpenChange, onLoginSuccess }: AuthDialogPro
           
           <div className="space-y-2">
             <Label htmlFor="password" className="text-base">
-              Parol
+              Kalit
             </Label>
             <div className="relative">
               <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 id="password"
                 type="password"
-                placeholder="Parolingizni kiriting"
+                placeholder="Kalitingizni kiriting"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -114,9 +114,7 @@ export function AuthDialog({ open, onOpenChange, onLoginSuccess }: AuthDialogPro
           </Button>
           
           <div className="text-center text-sm text-muted-foreground">
-            <p>Demo ma'lumotlar:</p>
-            <p>Login: <strong>admin</strong></p>
-            <p>Parol: <strong>123456</strong></p>
+           
           </div>
         </div>
       </DialogContent>
