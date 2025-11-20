@@ -24,7 +24,7 @@ export default function SearchBar({
     }, 300);
   };
   return (
-    <div className="flex flex-col sm:flex-row gap-4 items-center w-full max-w-2xl mx-auto">
+    <div style={{position:'relative'}} className=" flex flex-col sm:flex-row gap-4 items-center w-full max-w-2xl mx-auto">
       {/* Search Input - takes most space */}
       <div className="flex-1 w-full">
         <Input
@@ -42,7 +42,7 @@ export default function SearchBar({
         variant="outline"
         onClick={onDirectionToggle}
         className="px-2 border-2"
-        style={{position:'absolute',right:20,bottom:160, width:50,height:50}}
+        style={{position:'absolute',borderRadius:50, right:20,bottom:160, width:50,height:50}}
       >
         <ArrowLeftRight className="" />
 
