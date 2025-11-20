@@ -1,0 +1,143 @@
+.edit-word-container {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.edit-word-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-word-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.edit-word-title {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.edit-word-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #4a5568;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  outline: none;
+}
+
+.edit-input:focus {
+  border-color: #667eea;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.edit-input::placeholder {
+  color: #a0aec0;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.submit-btn {
+  flex: 2;
+  padding: 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 18px;
+  background: #e2e8f0;
+  color: #4a5568;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(102, 126, 234, 0.4);
+}
+
+.cancel-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(113, 128, 150, 0.4);
+  background: #cbd5e0;
+}
+
+/* Responsive dizayn */
+@media (max-width: 600px) {
+  .edit-word-card {
+    padding: 30px 25px;
+    margin: 10px;
+  }
+  
+  .edit-word-title {
+    font-size: 24px;
+  }
+  
+  .edit-input {
+    padding: 14px 16px;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .submit-btn, .cancel-btn {
+    padding: 16px;
+  }
+}
