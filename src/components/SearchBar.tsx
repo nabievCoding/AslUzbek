@@ -42,7 +42,7 @@ export default function SearchBar({
         variant="outline"
         onClick={onDirectionToggle}
         className="px-2 border-2"
-        style={{position:'absolute',borderRadius:50, right:20,bottom:160, width:50,height:50}}
+        style={{position:'absolute',borderRadius:50, right:20,bottom:-160, backgroundColor:'#f30b0b65', width:50,height:50}}
       >
         <ArrowLeftRight className="" />
 
