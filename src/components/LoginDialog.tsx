@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,20 @@ interface LoginDialogProps {
 export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
   const { isAdmin, login, logout } = useAuthStore();
+
+  // Mobile device ni aniqlash
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent));
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleLogin = () => {
     if (!username.trim() || !password.trim()) {
@@ -55,7 +68,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[400px]">
+      <DialogContent className={`sm:max-w-[400px] ${isMobile ? 'max-h-[90vh] overflow-y-auto' : ''}`}>
         {isAdmin ? (
           <>
             <DialogHeader>
@@ -65,7 +78,6 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
               </DialogDescription>
             </DialogHeader>
             
-      
             <DialogFooter>
               <Button onClick={handleLogout} variant="outline" className="w-full">
                 <LogOut className="h-4 w-4 mr-2" />
@@ -115,7 +127,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
               </div>
             </div>
             
-            <DialogFooter>
+            <DialogFooter className={`${isMobile ? 'sticky bottom-0 bg-background pt-4 pb-2 border-t' : ''}`}>
               <Button onClick={handleLogin} className="w-full bg-primary hover:bg-primary/90">
                 Kirish
               </Button>
