@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { SearchBar } from '@/components/SearchBar';
+import SearchBar from "@/components/SearchBar";
 import { AddWordDialog } from '@/components/AddWordDialog';
 import { AuthDialog } from '@/components/AuthDialog';
 import EditWord from '@/components/EditWord';
