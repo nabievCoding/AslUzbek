@@ -5,11 +5,11 @@
 [build.environment]
   NODE_VERSION = "20"
 [[redirects]]
-  from = "/asluzbeklugati/*"
-  to = "/asluzbeklugati/index.html"
+  from = "/AslUzbek/*"
+  to = "/AslUzbek/index.html"
   status = 200
 
 [[redirects]]
   from = "/*"
-  to = "/asluzbeklugati/index.html"
+  to = "/AslUzbek/index.html"
   status = 200
