@@ -18,7 +18,7 @@ export default function SearchBar({
   showAddButton 
 }: SearchBarProps) {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 items-center w-full max-w-2xl mx-auto">
+    <div className="flex flex-col sm:flex-row gap-4 items-center w-full max-w-2xl mx-auto sticky top-0 bg-white z-10 py-4">
       {/* Search Input - takes most space */}
       <div className="flex-1 w-full">
         <Input
@@ -36,17 +36,16 @@ export default function SearchBar({
         className="h-12 px-2 border-2"
       >
         <ArrowLeftRight className="" />
-        
       </Button>
       
-      {/* Add Word Button (only for admin) */}
+      {/* Add Word Button (only for admin) - faqat + belgisi */}
       {showAddButton && (
         <Button 
           onClick={onAddWord}
-          className="h-12 px-6 bg-green-600 hover:bg-green-700 text-white"
+          className="h-12 w-12 p-0 bg-green-600 hover:bg-green-700 text-white flex items-center justify-center"
+          title="So'z qo'shish"
         >
-          <Plus className="h-4 w-4 mr-2" />
-          Qo'shish
+          <Plus className="h-6 w-6" />
         </Button>
       )}
     </div>
