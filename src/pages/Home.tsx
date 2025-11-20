@@ -150,9 +150,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-20">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
@@ -192,118 +192,124 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="flex-1 flex flex-col">
         {/* Hero */}
-        <div className="text-center mb-12">
+        <div className="text-center py-8">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Ona Tilimizni Saqlaymiz</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Zamonaviy so'zlarning asl o'zbek tilida qanday aytilishini bilib oling
           </p>
         </div>
 
-        {/* Search Section */}
-        <div className="mb-12">
-          <SearchBar
-            searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
-            onAddWord={() => setAddDialogOpen(true)}
-            onDirectionToggle={() => setDirection(!direction)}
-            showAddButton={isAdmin}
-          />
+        {/* Search Section - STICKY */}
+        <div className="sticky top-16 z-10 bg-background/95 backdrop-blur-sm border-b border-border py-4">
+          <div className="container mx-auto px-4">
+            <SearchBar
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+              onAddWord={() => setAddDialogOpen(true)}
+              onDirectionToggle={() => setDirection(!direction)}
+              showAddButton={isAdmin}
+            />
+          </div>
         </div>
 
-        {/* Results */}
-        <div className="max-w-3xl mx-auto">
-          {isLoading && (
-            <div className="flex justify-center items-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        {/* Results - SCROLLABLE */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="container mx-auto px-4 py-6">
+            <div className="max-w-3xl mx-auto">
+              {isLoading && (
+                <div className="flex justify-center items-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                </div>
+              )}
+
+              {error && (
+                <div className="text-center py-12">
+                  <div className="text-6xl mb-4">⚠️</div>
+                  <h3 className="text-xl font-semibold mb-2 text-destructive">Xatolik yuz berdi</h3>
+                  <p className="text-muted-foreground">{error}</p>
+                </div>
+              )}
+
+              {!isLoading && !error && (
+                filteredWords.length > 0 ? (
+                  <div className="space-y-4">
+                    {filteredWords.map((word) => (
+                      <Card key={word.id} className="bg-card border-border hover:shadow-md transition-shadow">
+                        <CardContent className="p-6">
+                          <div className="flex items-center gap-4 mb-3">
+                            {isAdmin && (
+                              <div className="flex flex-col gap-2">
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8 text-primary hover:bg-primary/10"
+                                  onClick={() => handleEdit(word)}
+                                  title="Tahrirlash"
+                                >
+                                  <Pencil className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8 text-destructive hover:bg-destructive/10"
+                                  onClick={() => handleDelete(word)}
+                                  title="O'chirish"
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            )}
+                            
+                            <div className="flex-1">
+                              <div className="text-sm font-medium text-muted-foreground mb-1">
+                                {!direction ? "Zamonaviy" : 'Asl O`zbek'}
+                              </div>
+                              <div className="text-xl font-semibold gradient-text">
+                                {!direction ? word.zamon : word.asluzb}
+                              </div>
+                            </div>
+
+                            <ArrowLeftRight className="h-6 w-6 text-primary flex-shrink-0" />
+
+                            <div className="flex-1">
+                              <div className="text-sm font-medium text-muted-foreground mb-1">
+                                {direction ? "Zamonaviy" : 'Asl O`zbek'}
+                              </div>
+                              <div className="text-xl font-semibold gradient-text">
+                                {direction ? word.zamon : word.asluzb}
+                              </div>
+                            </div>
+                          </div>
+
+                          {word.izoh && (
+                            <div className="pt-3 border-t border-border">
+                              <p className="text-sm text-muted-foreground leading-relaxed">
+                                {word.izoh}
+                              </p>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="text-6xl mb-4">🔍</div>
+                    <h3 className="text-xl font-semibold mb-2">So'z topilmadi</h3>
+                    <p className="text-muted-foreground">Iltimos, boshqa so'z bilan qidirib ko'ring</p>
+                    
+                  </div>
+                )
+              )}
             </div>
-          )}
-
-          {error && (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">⚠️</div>
-              <h3 className="text-xl font-semibold mb-2 text-destructive">Xatolik yuz berdi</h3>
-              <p className="text-muted-foreground">{error}</p>
-            </div>
-          )}
-
-          {!isLoading && !error && (
-            filteredWords.length > 0 ? (
-              <div className="space-y-4">
-                {filteredWords.map((word) => (
-                  <Card key={word.id} className="bg-card border-border hover:shadow-md transition-shadow">
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4 mb-3">
-                        {isAdmin && (
-                          <div className="flex flex-col gap-2">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 text-primary hover:bg-primary/10"
-                              onClick={() => handleEdit(word)}
-                              title="Tahrirlash"
-                            >
-                              <Pencil className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 text-destructive hover:bg-destructive/10"
-                              onClick={() => handleDelete(word)}
-                              title="O'chirish"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        )}
-                        
-                        <div className="flex-1">
-                          <div className="text-sm font-medium text-muted-foreground mb-1">
-                            {!direction ? "Zamonaviy" : 'Asl O`zbek'}
-                          </div>
-                          <div className="text-xl font-semibold gradient-text">
-                            {!direction ? word.zamon : word.asluzb}
-                          </div>
-                        </div>
-
-                        <ArrowLeftRight className="h-6 w-6 text-primary flex-shrink-0" />
-
-                        <div className="flex-1">
-                          <div className="text-sm font-medium text-muted-foreground mb-1">
-                            {direction ? "Zamonaviy" : 'Asl O`zbek'}
-                          </div>
-                          <div className="text-xl font-semibold gradient-text">
-                            {direction ? word.zamon : word.asluzb}
-                          </div>
-                        </div>
-                      </div>
-
-                      {word.izoh && (
-                        <div className="pt-3 border-t border-border">
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {word.izoh}
-                          </p>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold mb-2">So'z topilmadi</h3>
-                <p className="text-muted-foreground">Iltimos, boshqa so'z bilan qidirib ko'ring</p>
-                
-              </div>
-            )
-          )}
+          </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="mt-20 border-t border-border bg-card/50">
+      <footer className="border-t border-border bg-card/50">
         <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
           <p>O'zbek Lug'ati © 2025 - Barcha huquqlar himoyalangan</p>
         </div>
