@@ -53,12 +53,12 @@ export const EditWord = ({ word, onSave, onCancel }) => {
           </div>
           
           <div className="input-group">
-            <label htmlFor="zamon" className="input-label">Zamonaviy versiya</label>
+            <label htmlFor="zamon" className="input-label">Kelgindi versiya</label>
             <input
               type="text"
               id="zamon"
               name="zamon"
-              placeholder="Zamonaviy"
+              placeholder="Kelgindi"
               value={formData.zamon}
               onChange={handleChange}
               className="edit-input"

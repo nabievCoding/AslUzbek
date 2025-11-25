@@ -160,7 +160,7 @@ export default function Home() {
             </div>
             <div>
               <h1 className="text-xl font-bold gradient-text">O'zbek Lug'ati</h1>
-              <p className="text-xs text-muted-foreground">Zamonaviy ↔ Asl O'zbek</p>
+              <p className="text-xs text-muted-foreground">Kelgindi ↔ Asl O'zbek</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -197,7 +197,7 @@ export default function Home() {
         <div className="text-center py-8">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Ona Tilimizni Saqlaymiz</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Zamonaviy so'zlarning asl o'zbek tilida qanday aytilishini bilib oling
+            Kelgindi so'zlarning asl o'zbek tilida qanday aytilishini bilib oling
           </p>
         </div>
 
@@ -264,7 +264,7 @@ export default function Home() {
                             
                             <div className="flex-1">
                               <div className="text-sm font-medium text-muted-foreground mb-1">
-                                {!direction ? "Zamonaviy" : 'Asl O`zbek'}
+                                {!direction ? "Kelgindi" : 'Asl O`zbek'}
                               </div>
                               <div className="text-xl font-semibold gradient-text">
                                 {!direction ? word.zamon : word.asluzb}
@@ -275,7 +275,7 @@ export default function Home() {
 
                             <div className="flex-1">
                               <div className="text-sm font-medium text-muted-foreground mb-1">
-                                {direction ? "Zamonaviy" : 'Asl O`zbek'}
+                                {direction ? "Kelgindi" : 'Asl O`zbek'}
                               </div>
                               <div className="text-xl font-semibold gradient-text">
                                 {direction ? word.zamon : word.asluzb}
@@ -347,7 +347,7 @@ export default function Home() {
                     </div>
                     <ArrowLeftRight className="h-4 w-4" />
                     <div className="flex-1">
-                      <div className="text-sm text-muted-foreground">Zamonaviy</div>
+                      <div className="text-sm text-muted-foreground">Kelgindi</div>
                       <div className="font-semibold">{selectedWord.zamon}</div>
                     </div>
                   </div>

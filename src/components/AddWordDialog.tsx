@@ -39,7 +39,7 @@ export function AddWordDialog({ open, onOpenChange }: AddWordDialogProps) {
 
   const handleAdd = () => {
     if (!modern.trim() || !traditional.trim()) {
-      toast.error("Iltimos, kamida zamonaviy va asl o'zbek so'zlarni kiriting");
+      toast.error("Iltimos, kamida Kelgindi va asl o'zbek so'zlarni kiriting");
       return;
     }
     setShowConfirmation(true);
@@ -85,7 +85,7 @@ export function AddWordDialog({ open, onOpenChange }: AddWordDialogProps) {
           <div className="space-y-5 py-4">
             <div className="space-y-2">
               <Label htmlFor="modern" className="text-base">
-                Zamonaviy So'z
+                Kelgindi So'z
               </Label>
               <Input
                 id="modern"
@@ -146,7 +146,7 @@ export function AddWordDialog({ open, onOpenChange }: AddWordDialogProps) {
           <div className="my-4 p-4 bg-muted rounded-lg">
             <div className="flex items-center gap-3 mb-2">
               <div className="flex-1">
-                <div className="text-sm text-muted-foreground mb-1">Zamonaviy</div>
+                <div className="text-sm text-muted-foreground mb-1">Kelgindi</div>
                 <div className="text-lg font-semibold">{modern}</div>
               </div>
               <ArrowRight className="h-5 w-5 text-primary" />

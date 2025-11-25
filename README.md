@@ -1,10 +1,10 @@
 # O'zbek Lug'ati
 
-Zamonaviy va Asl O'zbek tillarini tarjima qiluvchi ikki tomonlama lug'at sayti.
+Kelgindi va Asl O'zbek tillarini tarjima qiluvchi ikki tomonlama lug'at sayti.
 
 ## Xususiyatlar
 
-- 🔄 **Ikki tomonlama tarjima**: Zamonaviy ↔ Asl O'zbek
+- 🔄 **Ikki tomonlama tarjima**: Kelgindi ↔ Asl O'zbek
 - 🔍 **Tezkor qidiruv**: Real-time qidiruv funksiyasi
 - 🎨 **Dark/Light rejim**: Qulay interfeys
 - 🔐 **Admin panel**: So'zlarni tahrirlash va o'chirish
@@ -60,7 +60,7 @@ Admin sifatida kirgandan keyin, har bir so'z kartasida tahrirlash va o'chirish t
 
 ### words table
 - `id`: UUID (Primary Key)
-- `modern`: TEXT (Zamonaviy so'z)
+- `modern`: TEXT (Kelgindi so'z)
 - `traditional`: TEXT (Asl o'zbek so'z)
 - `description`: TEXT (Izoh, ixtiyoriy)
 - `created_at`: TIMESTAMP

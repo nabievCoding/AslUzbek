@@ -1,6 +1,6 @@
 export interface Word {
   id: string;
-  modern: string; // Zamonaviy so'z
+  modern: string; // Kelgindi so'z
   traditional: string; // Asl o'zbek
   description: string; // Izoh
   createdAt: string;

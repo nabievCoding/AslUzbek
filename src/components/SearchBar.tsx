@@ -28,7 +28,7 @@ export default function SearchBar({
       {/* Search Input - takes most space */}
       <div className="flex-1 w-full">
         <Input
-          placeholder="So'z qidirish (zamonaviy yoki asl o'zbek)..."
+          placeholder="So'z qidirish (Kelgindi yoki asl o'zbek)..."
           value={searchTerm}
           id="search-input"
           onFocus={handleInputFocus}
