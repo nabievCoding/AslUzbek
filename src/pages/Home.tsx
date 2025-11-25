@@ -6,9 +6,10 @@ import EditWord from '@/components/EditWord';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { ArrowLeftRight, BookOpen, Loader2, Pencil, Trash2, X, LogOut, Lock, User, LogIn } from 'lucide-react';
+import { ArrowLeftRight, BookOpen, Loader2, Pencil, Trash2, X, LogOut, Lock, User, LogIn, Download } from 'lucide-react'; // Download icon qo'shildi
 import { toast } from 'sonner';
 import { wordsApi } from  '../lib/api/words';
+import * as XLSX from 'xlsx'; // Excel kutubxonasi
 import {
   AlertDialog,
   AlertDialogAction,
@@ -39,6 +40,7 @@ export default function Home() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [authDialogOpen, setAuthDialogOpen] = useState(false);
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     const adminStatus = localStorage.getItem('isAdmin') === 'true';
@@ -71,6 +73,55 @@ export default function Home() {
       word.asluzb?.toLowerCase().includes(term)
     );
   }, [searchTerm, words]);
+
+  // Excel fayl yuklash funksiyasi
+  const downloadExcel = async () => {
+    if (words.length === 0) {
+      toast.error("Yuklab olish uchun so'zlar mavjud emas");
+      return;
+    }
+
+    setIsDownloading(true);
+    try {
+      // Excel ma'lumotlarini tayyorlash
+      const excelData = words.map((word, index) => ({
+        '№': index + 1,
+        'Asl O\'zbek So\'zi': word.asluzb,
+        'Kelgindi So\'z': word.zamon,
+        'Izoh': word.izoh || '',
+        'ID': word.id
+      }));
+
+      // Workbook yaratish
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(excelData);
+
+      // Stil sozlamalari
+      const columnWidths = [
+        { wch: 5 },  // №
+        { wch: 20 }, // Asl O'zbek So'zi
+        { wch: 20 }, // Kelgindi So'z
+        { wch: 40 }, // Izoh
+        { wch: 10 }, // ID
+      ];
+
+      worksheet['!cols'] = columnWidths;
+
+      // Workbook ga worksheet qo'shish
+      XLSX.utils.book_append_sheet(workbook, worksheet, "O'zbek Lug'ati");
+
+      // Faylni yuklab olish
+      const fileName = `ozbek-lugati-${new Date().toISOString().split('T')[0]}.xlsx`;
+      XLSX.writeFile(workbook, fileName);
+
+      toast.success(`Excel fayli muvaffaqiyatli yuklab olindi! (${words.length} ta so'z)`);
+    } catch (error) {
+      console.error('Excel yuklab olishda xatolik:', error);
+      toast.error('Faylni yuklab olishda xatolik yuz berdi');
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   const handleLoginSuccess = () => {
     setIsAdmin(true);
@@ -164,6 +215,23 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {/* Download Button - Har doim ko'rinadi */}
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={downloadExcel}
+              disabled={isDownloading || words.length === 0}
+              className="flex items-center gap-2"
+              title="Excel faylini yuklab olish"
+            >
+              {isDownloading ? (
+                <Loader2 className="h-3 w-3 animate-spin" />
+              ) : (
+                <Download className="h-3 w-3" />
+              )}
+              {isDownloading ? '' : ''}
+            </Button>
+
             {!isAdmin ? (
               <Button 
                 variant="outline" 
@@ -172,7 +240,6 @@ export default function Home() {
                 className="flex items-center gap-2"
               >
                 <LogIn className="h-3 w-3" />
-                
               </Button>
             ) : (
               <div className="flex items-center gap-2">
@@ -299,7 +366,6 @@ export default function Home() {
                     <div className="text-6xl mb-4">🔍</div>
                     <h3 className="text-xl font-semibold mb-2">So'z topilmadi</h3>
                     <p className="text-muted-foreground">Iltimos, boshqa so'z bilan qidirib ko'ring</p>
-                    
                   </div>
                 )
               )}
@@ -312,6 +378,7 @@ export default function Home() {
       <footer className="border-t border-border bg-card/50">
         <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
           <p>O'zbek Lug'ati © 2025 - Barcha huquqlar himoyalangan</p>
+          <p className="mt-1">Jami {words.length} ta so'z</p>
         </div>
       </footer>
 
